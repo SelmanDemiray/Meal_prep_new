@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for proper rendering and SEO -->
+    <meta charset="UTF-8"> <!-- Character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive viewport settings -->
+    <title>Family Meal & Budget Tracker</title> <!-- Page title shown in browser tab -->
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link to our stylesheet -->
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- External icon library -->
+</head>
+<body>
+    <div class="container"> <!-- Main container to hold all content -->
+        <header>
+            <h1>Family Meal & Budget Tracker</h1> <!-- Main heading for the page -->
+            <div id="error-banner" class="hidden"></div> <!-- Error message display area, hidden by default -->
+        </header>
+        
+        <nav>
+            <button id="meal-planner-tab" class="tab active">Meal Planner</button> <!-- Changed from meal-tab -->
+            <button id="budget-tracker-tab" class="tab">Budget Tracker</button> <!-- Changed from budget-tab -->
+            <button id="reports-tab" class="tab">Nutrition Reports</button> <!-- This one was already correct -->
+        </nav>
+        
+        <main id="main-content"> <!-- Main content area that will change based on selected tab -->
+            <!-- Meal Planner Section -->
+            <section id="meal-planner" class="tab-content active">
+                <div class="controls">
+                    <div class="date-picker">
+                        <button id="prev-day"><i class="fas fa-chevron-left"></i></button> <!-- Previous day button -->
+                        <input type="date" id="selected-date"> <!-- Date selector -->
+                        <button id="next-day"><i class="fas fa-chevron-right"></i></button> <!-- Next day button -->
+                    </div>
+                    <div class="family-member-selector">
+                        <label for="family-member">Family Member:</label> <!-- Label for dropdown -->
+                        <select id="family-member"> <!-- Dropdown to select family member -->
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <button id="add-family-member"><i class="fas fa-plus"></i> Add Member</button> <!-- Button to add new family member -->
+                    </div>
+                </div>
+                
+                <div class="meal-container">
+                    <div class="meal-column">
+                        <h3>Breakfast <button class="add-meal" data-meal-type="breakfast"><i class="fas fa-plus"></i></button></h3> <!-- Breakfast section header with add button -->
+                        <div id="breakfast-items" class="meal-items"></div> <!-- Container for breakfast items -->
+                    </div>
+                    <div class="meal-column">
+                        <h3>Lunch <button class="add-meal" data-meal-type="lunch"><i class="fas fa-plus"></i></button></h3> <!-- Lunch section header with add button -->
+                        <div id="lunch-items" class="meal-items"></div> <!-- Container for lunch items -->
+                    </div>
+                    <div class="meal-column">
+                        <h3>Dinner <button class="add-meal" data-meal-type="dinner"><i class="fas fa-plus"></i></button></h3> <!-- Dinner section header with add button -->
+                        <div id="dinner-items" class="meal-items"></div> <!-- Container for dinner items -->
+                    </div>
+                    <div class="meal-column">
+                        <h3>Snacks <button class="add-meal" data-meal-type="snacks"><i class="fas fa-plus"></i></button></h3> <!-- Snacks section header with add button -->
+                        <div id="snack-items" class="meal-items"></div> <!-- Container for snack items -->
+                    </div>
+                </div>
+                
+                <div class="daily-summary">
+                    <h3>Daily Nutrition Summary</h3> <!-- Header for nutrition summary section -->
+                    <div id="nutrition-summary">
+                        <!-- Nutrition data will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Budget Tracker Section - hidden by default -->
+            <section id="budget-tracker" class="tab-content">
+                <div class="budget-controls">
+                    <div>
+                        <label for="budget-month">Month:</label> <!-- Label for month selector -->
+                        <input type="month" id="budget-month"> <!-- Month selector for budget -->
+                    </div>
+                    <div>
+                        <label for="monthly-budget">Monthly Budget ($):</label> <!-- Label for budget input -->
+                        <input type="number" id="monthly-budget" min="0" step="0.01"> <!-- Budget amount input -->
+                        <button id="update-budget">Update</button> <!-- Button to update budget -->
+                    </div>
+                </div>
+                
+                <div class="expense-section">
+                    <h3>Meal Expenses <button id="add-expense"><i class="fas fa-plus"></i> Add Expense</button></h3> <!-- Expenses section header -->
+                    <table id="expenses-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th> <!-- Column header for date -->
+                                <th>Description</th> <!-- Column header for expense description -->
+                                <th>Amount</th> <!-- Column header for expense amount -->
+                                <th>Actions</th> <!-- Column header for action buttons -->
+                            </tr>
+                        </thead>
+                        <tbody id="expenses-body">
+                            <!-- Expenses will be populated here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="budget-summary">
+                    <h3>Budget Summary</h3> <!-- Header for budget summary section -->
+                    <div id="budget-summary-content">
+                        <!-- Budget summary will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Nutrition Reports Section - hidden by default -->
+            <section id="reports" class="tab-content">
+                <div class="reports-controls">
+                    <div>
+                        <label for="report-type">Report Type:</label> <!-- Label for report type selector -->
+                        <select id="report-type"> <!-- Dropdown for report type -->
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="report-member">Family Member:</label> <!-- Label for family member selector -->
+                        <select id="report-member"> <!-- Dropdown for family member selection -->
+                            <option value="all">All Members</option>
+                            <!-- Other options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <button id="generate-report">Generate Report</button> <!-- Button to generate nutrition report -->
+                </div>
+                
+                <div id="report-results">
+                    <h3>Nutrition Analysis</h3> <!-- Header for nutrition analysis -->
+                    <div id="nutrition-charts">
+                        <!-- Charts will be rendered here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Family Meal & Budget Tracker | <a href="#" id="reset-data">Reset All Data</a></p> <!-- Footer with reset data link -->
+        </footer>
+    </div>
+    
+    <!-- Modals -->
+    <div id="modal-overlay" class="hidden"> <!-- Modal overlay that darkens the screen -->
+        <div id="add-meal-modal" class="modal hidden"> <!-- Modal for adding meals -->
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+        <div id="add-expense-modal" class="modal hidden"> <!-- Modal for adding expenses -->
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+        <div id="add-family-modal" class="modal hidden"> <!-- Modal for adding family members -->
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script src="js/errorHandler.js"></script> <!-- Error handling functionality -->
+    <script src="js/dataStore.js"></script> <!-- Data storage functionality -->
+    <script src="js/visualizer.js"></script> <!-- Visualization helpers -->
+    <script src="js/nutritionCalculator.js"></script> <!-- Nutrition calculation functionality -->
+    <script src="js/mealTracker.js"></script> <!-- Meal tracking functionality -->
+    <script src="js/budgetTracker.js"></script> <!-- Budget tracking functionality -->
+    <script src="js/app.js"></script> <!-- Main application logic -->
+</body>
+</html>

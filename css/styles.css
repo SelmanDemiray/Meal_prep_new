@@ -1,0 +1,866 @@
+/* Reset styles to ensure consistent rendering across browsers */
+* {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    box-sizing: border-box; /* Include padding and border in element's width and height */
+}
+
+/* Body styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family for the entire document */
+    line-height: 1.6; /* Set line height for readability */
+    color: #333; /* Set default text color */
+    background-color: #f5f7fa; /* Set light background color */
+}
+
+/* Container for the entire app */
+.container {
+    max-width: 1200px; /* Set maximum width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding around the content */
+}
+
+/* Header styles */
+header {
+    padding: 20px 0; /* Add padding to top and bottom */
+    text-align: center; /* Center text in header */
+}
+
+header h1 {
+    margin-bottom: 10px; /* Add space below the heading */
+    color: #2c3e50; /* Set heading color */
+}
+
+/* Navigation tabs */
+nav {
+    display: flex; /* Use flexbox for layout */
+    margin-bottom: 20px; /* Add space below navigation */
+    border-bottom: 2px solid #ddd; /* Add border below navigation */
+}
+
+.tab {
+    padding: 10px 20px; /* Add padding to tabs */
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 16px; /* Set font size */
+    font-weight: 600; /* Set font weight */
+    transition: all 0.3s; /* Add smooth transition */
+    color: #7f8c8d; /* Set text color */
+}
+
+.tab:hover {
+    color: #3498db; /* Change text color on hover */
+}
+
+.tab.active {
+    color: #3498db; /* Set active tab text color */
+    border-bottom: 3px solid #3498db; /* Add underline to active tab */
+}
+
+/* Tab content containers */
+.tab-content {
+    display: none; /* Hide all tab content by default */
+}
+
+.tab-content.active {
+    display: block; /* Show active tab content */
+}
+
+/* Controls section */
+.controls, .budget-controls, .reports-controls {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px; /* Add space below controls */
+    padding: 15px; /* Add padding around controls */
+    background-color: white; /* Set white background */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add subtle shadow */
+}
+
+/* Date picker and family member selector */
+.date-picker, .family-member-selector {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Add gap between elements */
+}
+
+/* Input fields */
+input, select {
+    padding: 8px 12px; /* Add padding to inputs */
+    border: 1px solid #ddd; /* Add border to inputs */
+    border-radius: 4px; /* Add rounded corners */
+    font-size: 14px; /* Set font size */
+}
+
+button {
+    padding: 8px 16px; /* Add padding to buttons */
+    background-color: #3498db; /* Set button background color */
+    color: white; /* Set button text color */
+    border: none; /* Remove default button border */
+    border-radius: 4px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Add smooth transition */
+}
+
+button:hover {
+    background-color: #2980b9; /* Darken button on hover */
+}
+
+/* Meal container */
+.meal-container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Create responsive columns */
+    gap: 20px; /* Add gap between columns */
+    margin-bottom: 30px; /* Add space below meal container */
+}
+
+.meal-column {
+    background-color: white; /* Set white background */
+    padding: 15px; /* Add padding */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add subtle shadow */
+}
+
+.meal-column h3 {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space title and button */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 15px; /* Add space below heading */
+    padding-bottom: 10px; /* Add padding below heading */
+    border-bottom: 1px solid #eee; /* Add border below heading */
+}
+
+.add-meal {
+    padding: 4px 8px; /* Add padding to button */
+    font-size: 12px; /* Set smaller font size */
+}
+
+.meal-item {
+    background-color: #f8f9fa; /* Set light background */
+    padding: 10px; /* Add padding */
+    margin-bottom: 10px; /* Add space below item */
+    border-radius: 4px; /* Add rounded corners */
+    position: relative; /* For positioning child elements */
+}
+
+.meal-item h4 {
+    margin-bottom: 5px; /* Add space below heading */
+}
+
+.meal-item p {
+    font-size: 14px; /* Set font size */
+    color: #666; /* Set text color */
+}
+
+.meal-item .actions {
+    position: absolute; /* Position absolutely */
+    right: 10px; /* Position from the right */
+    top: 10px; /* Position from the top */
+}
+
+.meal-item .actions button {
+    padding: 2px 6px; /* Add padding to button */
+    font-size: 12px; /* Set smaller font size */
+    margin-left: 5px; /* Add space between buttons */
+}
+
+/* Daily summary section */
+.daily-summary, .budget-summary {
+    background-color: white; /* Set white background */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add subtle shadow */
+    margin-bottom: 30px; /* Add space below section */
+}
+
+.daily-summary h3, .budget-summary h3 {
+    margin-bottom: 15px; /* Add space below heading */
+    padding-bottom: 10px; /* Add padding below heading */
+    border-bottom: 1px solid #eee; /* Add border below heading */
+}
+
+/* Budget tracker section */
+.expense-section {
+    background-color: white; /* Set white background */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Add rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add subtle shadow */
+    margin-bottom: 30px; /* Add space below section */
+}
+
+.expense-section h3 {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space title and button */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 15px; /* Add space below heading */
+    padding-bottom: 10px; /* Add padding below heading */
+    border-bottom: 1px solid #eee; /* Add border below heading */
+}
+
+/* Tables for expenses */
+table {
+    width: 100%; /* Make table full width */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+table th, table td {
+    padding: 12px 15px; /* Add padding to cells */
+    text-align: left; /* Left align text */
+    border-bottom: 1px solid #eee; /* Add border between rows */
+}
+
+table th {
+    background-color: #f8f9fa; /* Set light background for headers */
+    color: #333; /* Set header text color */
+    font-weight: 600; /* Set font weight */
+}
+
+/* Modal styles */
+#modal-overlay {
+    position: fixed; /* Fix position to viewport */
+    top: 0; /* Position from the top */
+    left: 0; /* Position from the left */
+    right: 0; /* Position from the right */
+    bottom: 0; /* Position from the bottom */
+    background-color: rgba(0,0,0,0.5); /* Set semi-transparent background */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Set high z-index to appear on top */
+}
+
+.modal {
+    background-color: white; /* Set white background */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Add rounded corners */
+    max-width: 500px; /* Set maximum width */
+    width: 100%; /* Make full width up to max-width */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Add shadow */
+}
+
+.modal h3 {
+    margin-bottom: 15px; /* Add space below heading */
+}
+
+.modal-form div {
+    margin-bottom: 15px; /* Add space below form elements */
+}
+
+.modal-form label {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Add space below labels */
+    font-weight: 600; /* Set font weight */
+}
+
+.modal-buttons {
+    display: flex; /* Use flexbox for layout */
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 10px; /* Add gap between buttons */
+    margin-top: 20px; /* Add space above buttons */
+}
+
+/* Error banner */
+#error-banner {
+    background-color: #f8d7da; /* Set light red background */
+    color: #721c24; /* Set dark red text */
+    padding: 10px 15px; /* Add padding */
+    margin-top: 10px; /* Add space above banner */
+    border-radius: 4px; /* Add rounded corners */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space message and close button */
+    align-items: center; /* Center items vertically */
+}
+
+#error-banner button {
+    background: none; /* Remove button background */
+    color: #721c24; /* Set button color */
+    border: none; /* Remove button border */
+    font-size: 20px; /* Set button font size */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 0 5px; /* Add padding */
+}
+
+/* Reports section */
+#nutrition-charts {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Create responsive columns */
+    gap: 20px; /* Add gap between charts */
+    margin-top: 20px; /* Add space above charts */
+}
+
+/* Nutrition summary styles */
+.nutrition-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.nutrition-card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.nutrition-card h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.nutrition-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.nutrition-target {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 4px;
+}
+
+.progress.over-budget {
+    background-color: #e74c3c;
+}
+
+.daily-cost {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Budget metrics styles */
+.budget-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.metric {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.metric h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.amount.negative {
+    color: #e74c3c;
+}
+
+.budget-progress, .budget-projection {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    margin: 15px 0;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.progress-info {
+    text-align: center;
+    font-size: 14px;
+}
+
+.progress-info.negative {
+    color: #e74c3c;
+}
+
+.meals-cost-breakdown {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.meal-cost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.total-meal-cost {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Form row for side-by-side inputs */
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.form-row > div {
+    flex: 1;
+}
+
+/* Simple chart styles */
+.simple-chart {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-bars {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding-bottom: 25px;
+    position: relative;
+}
+
+.chart-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.chart-bar-container {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.chart-bar {
+    width: 100%;
+    background-color: #3498db;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s;
+}
+
+.chart-label {
+    font-size: 10px;
+    transform: rotate(-45deg);
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 40px;
+}
+
+.chart-value {
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.chart-series {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.chart-series::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #3498db;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+.chart-bar-container.stacked {
+    flex-direction: column;
+}
+
+.chart-bar-segment {
+    width: 100%;
+    position: relative;
+}
+
+.chart-bar-protein {
+    background-color: #3498db;
+}
+
+.chart-series-protein::before {
+    background-color: #3498db;
+}
+
+.chart-bar-carbs {
+    background-color: #2ecc71;
+}
+
+.chart-series-carbs::before {
+    background-color: #2ecc71;
+}
+
+.chart-bar-fat {
+    background-color: #e67e22;
+}
+
+.chart-series-fat::before {
+    background-color: #e67e22;
+}
+
+.segment-tooltip {
+    position: absolute;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.chart-bar-segment:hover .segment-tooltip {
+    opacity: 1;
+}
+
+.report-summary {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    grid-column: 1 / -1;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-label {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.summary-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important; /* Hide element */
+}
+
+/* Footer */
+footer {
+    text-align: center; /* Center text */
+    margin-top: 40px; /* Add space above footer */
+    padding: 20px 0; /* Add padding */
+    color: #7f8c8d; /* Set text color */
+    font-size: 14px; /* Set font size */
+}
+
+footer a {
+    color: #3498db; /* Set link color */
+    text-decoration: none; /* Remove underline */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .controls, .budget-controls, .reports-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .date-picker, .family-member-selector {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .meal-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .nutrition-summary-grid, .budget-metrics, .meal-cost-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* View mode toggle */
+.view-mode-toggle {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.mode-btn {
+    padding: 6px 12px;
+    background-color: #f8f9fa;
+    color: #7f8c8d;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mode-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* Summary mode label */
+.summary-mode {
+    background-color: #f2f6fa;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+/* Consume meal button specific styles */
+.consume-meal {
+    background-color: #2ecc71;
+}
+
+.consume-meal:hover {
+    background-color: #27ae60;
+}
+
+/* Comparison charts */
+.comparison-chart {
+    height: 250px;
+}
+
+.chart-bar-container.comparison {
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.chart-bar.planned {
+    background-color: #3498db;
+    opacity: 0.6;
+    max-width: 45%;
+}
+
+.chart-bar.consumed {
+    background-color: #2ecc71;
+    max-width: 45%;
+}
+
+.planned-series::before {
+    background-color: #3498db;
+    opacity: 0.6;
+}
+
+.consumed-series::before {
+    background-color: #2ecc71;
+}
+
+/* Report summary tabs */
+.summary-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.summary-tab {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+.summary-tab.active {
+    color: #3498db;
+    border-bottom: 3px solid #3498db;
+}
+
+.summary-content {
+    display: none;
+}
+
+.summary-content.active {
+    display: block;
+}
+
+/* Nutrient tabs in reports */
+.nutrient-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.nutrient-tab {
+    padding: 6px 12px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+.nutrient-tab.active {
+    color: #3498db;
+    border-bottom: 3px solid #3498db;
+}
+
+/* Comparison values in report summary */
+.summary-value.comparison {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.summary-value.comparison::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 5px;
+}
+
+.summary-value.comparison.positive::before {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid #2ecc71;
+}
+
+.summary-value.comparison.negative::before {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid #e74c3c;
+}
+
+/* Member costs display */
+.member-costs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+/* Enhance cost items for better visibility */
+.cost {
+    background-color: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #e67e22;
+    margin-left: 5px;
+}
+
+/* Empty state styling */
+.empty-state {
+    padding: 20px;
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px dashed #ddd;
+}
+
+/* Enhanced media queries for better responsive design */
+@media (max-width: 992px) {
+    #nutrition-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    .view-mode-toggle {
+        margin: 10px 0;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .controls {
+        flex-wrap: wrap;
+    }
+}
