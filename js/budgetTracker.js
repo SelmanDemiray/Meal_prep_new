@@ -600,6 +600,98 @@ const BudgetTracker = (function() {
         }
     }
     
+    /**
+     * Calculate and display meal costs analysis
+     */
+    function calculateAndDisplayMealCosts() {
+        try {
+            const container = document.getElementById('meal-costs');
+            if (!container) return;
+            
+            // Parse month components
+            const year = parseInt(currentMonth.split('-')[0]);
+            const month = parseInt(currentMonth.split('-')[1]);
+            
+            // Format dates for range
+            const startDate = `${year}-${month.toString().padStart(2, '0')}-01`;
+            const lastDay = new Date(year, month, 0).getDate();
+            const endDate = `${year}-${month.toString().padStart(2, '0')}-${lastDay}`;
+            
+            // Get meal costs for the date range (across all family members)
+            const mealCosts = DataStore.getMealCostsForDateRange(startDate, endDate);
+            
+            // Group by meal type
+            const mealTypeCosts = {
+                breakfast: { count: 0, totalCost: 0 },
+                lunch: { count: 0, totalCost: 0 },
+                dinner: { count: 0, totalCost: 0 },
+                snacks: { count: 0, totalCost: 0 }
+            };
+            
+            // Calculate costs by meal type
+            const allMeals = DataStore.getMeals();
+            for (const key in allMeals) {
+                const [date, memberId] = key.split('_');
+                const dateObj = new Date(date);
+                
+                // Check if the date is in the current month
+                if (dateObj.getMonth() + 1 === month && dateObj.getFullYear() === year) {
+                    const mealData = allMeals[key];
+                    
+                    // Add up costs for each meal type
+                    for (const type in mealData) {
+                        if (mealData[type] && Array.isArray(mealData[type]) && mealData[type].length > 0) {
+                            mealTypeCosts[type].count += mealData[type].length;
+                            
+                            // Calculate cost for each food item
+                            mealData[type].forEach(item => {
+                                const food = DataStore.getFoodById(item.foodId);
+                                if (food && food.costPerServing) {
+                                    mealTypeCosts[type].totalCost += food.costPerServing * (parseFloat(item.servings) || 1);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            
+            // Generate HTML
+            let html = '<div class="meal-cost-grid">';
+            
+            for (const type in mealTypeCosts) {
+                const { count, totalCost } = mealTypeCosts[type];
+                const avgCost = count > 0 ? totalCost / count : 0;
+                
+                html += `
+                    <div class="cost-item">
+                        <span class="cost-label">${type.charAt(0).toUpperCase() + type.slice(1)}:</span>
+                        <span class="cost-value">$${avgCost.toFixed(2)}/meal</span>
+                    </div>
+                `;
+            }
+            
+            // Calculate overall average
+            const totalMeals = Object.values(mealTypeCosts).reduce((sum, { count }) => sum + count, 0);
+            const totalCost = Object.values(mealTypeCosts).reduce((sum, { totalCost }) => sum + totalCost, 0);
+            const overallAvg = totalMeals > 0 ? totalCost / totalMeals : 0;
+            
+            html += `
+                </div>
+                <div class="total-meal-cost">
+                    Average cost per meal: <strong>$${overallAvg.toFixed(2)}</strong>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        } catch (error) {
+            ErrorHandler.handleError(
+                ErrorHandler.ERROR_CODES.UI_RENDER_ERROR,
+                "Failed to display meal costs analysis",
+                error.message
+            );
+        }
+    }
+    
     // Public API
     return {
         initialize,

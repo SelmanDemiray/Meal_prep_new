@@ -22,6 +22,9 @@ const App = (function() {
             // Initialize the data store with default values if needed
             DataStore.initializeStorage();
             
+            // Set up theme functionality
+            setupThemeToggle();
+            
             // Set up tab navigation
             setupTabNavigation();
             
@@ -48,6 +51,67 @@ const App = (function() {
             ErrorHandler.handleError(
                 ErrorHandler.ERROR_CODES.UNKNOWN_ERROR,
                 "Failed to initialize application",
+                error.message
+            );
+        }
+    }
+    
+    /**
+     * Set up theme toggle functionality
+     */
+    function setupThemeToggle() {
+        try {
+            // Create theme toggle button
+            const header = document.querySelector('header');
+            if (header) {
+                // Create button if it doesn't exist
+                if (!document.querySelector('.theme-toggle')) {
+                    const themeBtn = document.createElement('button');
+                    themeBtn.className = 'theme-toggle';
+                    themeBtn.innerHTML = '<i class="fas fa-moon"></i><i class="fas fa-sun"></i>';
+                    themeBtn.setAttribute('aria-label', 'Toggle dark mode');
+                    header.appendChild(themeBtn);
+                    
+                    // Add click handler
+                    themeBtn.addEventListener('click', toggleTheme);
+                }
+            }
+            
+            // Apply saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Use system preference if no saved preference
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        } catch (error) {
+            ErrorHandler.handleError(
+                ErrorHandler.ERROR_CODES.UI_INTERACTION_ERROR,
+                "Failed to set up theme toggle",
+                error.message
+            );
+        }
+    }
+    
+    /**
+     * Toggle between light and dark themes
+     */
+    function toggleTheme() {
+        try {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Update the theme attribute
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', newTheme);
+        } catch (error) {
+            ErrorHandler.handleError(
+                ErrorHandler.ERROR_CODES.UI_INTERACTION_ERROR,
+                "Failed to toggle theme",
                 error.message
             );
         }
